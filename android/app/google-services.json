@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "39141837284",
+    "firebase_url": "https://notistapp-6e12b.firebaseio.com",
+    "project_id": "notistapp-6e12b",
+    "storage_bucket": "notistapp-6e12b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39141837284:android:6292c7907f640051fb1ff1",
+        "android_client_info": {
+          "package_name": "com.example.notistapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "39141837284-k7ojvikem0ldnr9d6tn0dnclkvsbgjtp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCP0NoSMpDWuWlHfemOuuWkp2-t6tSP6do"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "39141837284-k7ojvikem0ldnr9d6tn0dnclkvsbgjtp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

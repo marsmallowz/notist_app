@@ -1,0 +1,35 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firestore_ui/animated_firestore_staggered.dart';
+import 'package:firestore_ui/firestore_ui.dart';
+import 'package:flushbar/flushbar.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:notistapp/bloc/blocs.dart';
+import 'package:notistapp/models/models.dart';
+import 'package:notistapp/services/services.dart';
+import 'package:notistapp/shared/shared.dart';
+import 'package:notistapp/ui/widgets/widgets.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
+import 'package:intl/intl.dart';
+
+part 'sign_in_page.dart';
+part 'main_page.dart';
+part 'wrapper.dart';
+part 'splash_page.dart';
+part 'account_confirmation_page.dart';
+part 'sign_up_page.dart';
+part 'home_page.dart';
+part 'make_note_page.dart';
+part 'make_option_page.dart';
+part 'poll_page.dart';
+part 'NewPollPage.dart';
+part 'setting_page.dart';
