@@ -58,12 +58,39 @@ class _MakeNotePageState extends State<MakeNotePage> {
             IconButton(
               icon: Icon(Icons.add_photo_alternate),
               onPressed: () async {
-                if (photoDescription == null) {
-                  photoDescription = await getImage();
-                } else {
-                  photoDescription = null;
-                }
-                setState(() {});
+                await showDialog(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                          title: Text("Chose Image Picker"),
+                          backgroundColor: Colors.white,
+                          actions: [
+                            FlatButton(
+                              onPressed: () async {
+                                if (photoDescription == null) {
+                                  photoDescription =
+                                      await getImage(ImageSource.camera);
+                                } else {
+                                  photoDescription = null;
+                                }
+                                setState(() {});
+                              },
+                              child: Text("Camera"),
+                            ),
+                            FlatButton(
+                              onPressed: () async {
+                                if (photoDescription == null) {
+                                  photoDescription =
+                                      await getImage(ImageSource.gallery);
+                                } else {
+                                  photoDescription = null;
+                                }
+                                setState(() {});
+                              },
+                              child: Text("Gallery"),
+                            ),
+                          ],
+                        ),
+                    barrierDismissible: true);
               },
             ),
             // ignore: missing_return
@@ -140,8 +167,9 @@ class _MakeNotePageState extends State<MakeNotePage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          ZoomPhoto(photoDescription)));
+                                      builder: (context) => ZoomPhoto(
+                                            photoDescription: photoDescription,
+                                          )));
                             },
                           ),
                         ),
@@ -205,30 +233,36 @@ class _MakeNotePageState extends State<MakeNotePage> {
   }
 }
 
-class ZoomPhoto extends StatefulWidget {
-  final File photoDescription;
-  ZoomPhoto(this.photoDescription);
-  @override
-  _ZoomPhotoState createState() => _ZoomPhotoState();
-}
-
-class _ZoomPhotoState extends State<ZoomPhoto> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Hero(
-          tag: "zoomPhoto",
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: FileImage(widget.photoDescription),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+//class ZoomPhoto extends StatefulWidget {
+//  final File photoDescription;
+//  ZoomPhoto(this.photoDescription);
+//  @override
+//  _ZoomPhotoState createState() => _ZoomPhotoState();
+//}
+//
+//class _ZoomPhotoState extends State<ZoomPhoto> {
+//  @override
+//  Widget build(BuildContext context) {
+//    return Scaffold(
+//      body: Center(
+//        child: Hero(
+//          tag: "zoomPhoto",
+//          child: Container(
+//            decoration: BoxDecoration(
+//              image: DecorationImage(
+//                image: FileImage(widget.photoDescription),
+//                fit: BoxFit.cover,
+//              ),
+//            ),
+//          ),
+//        ),
+//      ),
+//    );
+//  }
+//}
+//if (photoDescription == null) {
+//photoDescription = await getImage(ImageSource.gallery);
+//} else {
+//photoDescription = null;
+//}
+//setState(() {});

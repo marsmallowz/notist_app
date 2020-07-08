@@ -76,13 +76,13 @@ class _MakeOptionPageState extends State<MakeOptionPage> {
                         alignment: Alignment.bottomCenter,
                         child: GestureDetector(
                           onTap: () async {
-                            if (widget.makePollData.photoDescription == null) {
-                              widget.makePollData.photoDescription =
-                                  await getImage();
-                            } else {
-                              widget.makePollData.photoDescription = null;
-                            }
-                            setState(() {});
+//                            if (widget.makePollData.photoDescription == null) {
+//                              widget.makePollData.photoDescription =
+//                                  await getImage();
+//                            } else {
+//                              widget.makePollData.photoDescription = null;
+//                            }
+//                            setState(() {});
                           },
                           child: Container(
                             height: 28,

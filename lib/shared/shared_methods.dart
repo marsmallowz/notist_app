@@ -1,8 +1,8 @@
 part of 'shared.dart';
 
-Future<File> getImage() async {
+Future<File> getImage(ImageSource source) async {
   final _picker = ImagePicker();
-  var image = await _picker.getImage(source: ImageSource.gallery);
+  var image = await _picker.getImage(source: source);
   final File file = File(image.path);
   return file;
 //  var image = await ImagePicker.pickImage(source: ImageSource.gallery);

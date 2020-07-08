@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
               query: query,
               staggeredTileBuilder: (int index, DocumentSnapshot snapshot) =>
                   StaggeredTile.count(
-                      2, ('${snapshot['descriptionPhoto']}' != "") ? 3.4 : 1.5),
+                      2, ('${snapshot['descriptionPhoto']}' != "") ? 3.8 : 1.5),
               crossAxisCount: 4,
               mainAxisSpacing: 10.0,
               crossAxisSpacing: 10.0,
@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
               margin:
                   EdgeInsets.only(bottom: defaultMargin, right: defaultMargin),
               child: FloatingActionButton(
-                elevation: 0,
+//                elevation: 0,
                 backgroundColor: mainDark,
                 child: SizedBox(
                   height: 26,
@@ -152,9 +152,9 @@ class MessageGridTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 //    QuerySnapshot snapshot = document.getDocuments();
-    DateTime date = DateTime.fromMillisecondsSinceEpoch(
-        document['date'].millisecondsSinceEpoch);
-    String formattedDate = DateFormat('MMM d, yyy kk:mm a').format(date);
+//    DateTime date = DateTime.fromMillisecondsSinceEpoch(
+//        document['date'].millisecondsSinceEpoch);
+//    String formattedDate = DateFormat('MMM d, yyy kk:mm a').format(date);
     Color parseColor(data) {
       switch (data) {
         case 'Color(0xffffffff)':
@@ -189,17 +189,17 @@ class MessageGridTile extends StatelessWidget {
                 .where("email", isEqualTo: "${document['ownerId']}")
                 .snapshots(),
             builder: (context, snapshot) {
+              if (snapshot.data == null) return CircularProgressIndicator();
               final dataUser = snapshot.data.documents;
-
               return Stack(
                 children: [
                   if ('${document['descriptionPhoto']}' != "")
                     Column(
                       children: [
                         Expanded(
-                          flex: 4,
+                          flex: 3,
                           child: Container(
-                            width: double.infinity,
+                            height: double.infinity,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.only(
                                     topRight: Radius.circular(10),
@@ -210,48 +210,103 @@ class MessageGridTile extends StatelessWidget {
                                     fit: BoxFit.cover)),
                           ),
                         ),
-                        Container(
-                          padding: EdgeInsets.only(top: 10, bottom: 20),
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                              color: parseColor('${document['colorNote']}'),
-//                          border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10))),
+                        Expanded(
+                          flex: 2,
                           child: Container(
-                            margin: EdgeInsets.symmetric(
-                                horizontal: defaultMargin, vertical: 5),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(bottom: 5),
-                                  child: Text(
-                                    '${document['tittle']}',
-                                    overflow: TextOverflow.ellipsis,
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.w700),
+                            padding: EdgeInsets.only(top: 10, bottom: 15),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                color: parseColor('${document['colorNote']}'),
+//                          border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(10),
+                                    bottomRight: Radius.circular(10))),
+                            child: Container(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 18, vertical: 5),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(bottom: 5),
+                                    child: Text(
+                                      '${document['tittle']}',
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
-                                ),
-                                Container(
-                                  child: Text(
-                                    '${document['description']}',
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 13),
-                                    maxLines: 2,
+                                  Expanded(
+                                    flex: 36,
+                                    child: Container(
+                                      margin: EdgeInsets.only(bottom: 12),
+                                      child: Text(
+                                        '${document['description']}',
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 11),
+                                        maxLines: 2,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 5),
-                                  child: Text(
-                                    '$formattedDate',
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 12),
+                                  Expanded(flex: 1, child: SizedBox()),
+                                  Expanded(
+                                    flex: 24,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        FittedBox(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "${dataUser[0]["name"]}",
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: Colors.black
+                                                        .withOpacity(0.7)),
+                                              ),
+                                              SizedBox(
+                                                height: 2,
+                                              ),
+                                              Text(
+                                                "Developer",
+                                                style: TextStyle(fontSize: 10),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        FittedBox(
+                                          fit: BoxFit.contain,
+                                          child: Container(
+                                            width: 50,
+                                            height: 50,
+                                            decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                image: DecorationImage(
+                                                    image: ("${dataUser[0]["profilePicture"]}" ==
+                                                            ""
+                                                        ? AssetImage(
+                                                            "assets/user_pic1.png")
+                                                        : NetworkImage(
+                                                            "${dataUser[0]["profilePicture"]}")),
+                                                    fit: BoxFit.cover)),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         )
@@ -278,58 +333,72 @@ class MessageGridTile extends StatelessWidget {
                                 maxLines: 1,
                               ),
                             ),
-                            Container(
-                              margin: EdgeInsets.only(bottom: 12),
-                              child: Text(
-                                '${document['description']}',
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 13),
-                                maxLines: 2,
+                            Expanded(
+                              flex: 36,
+                              child: Container(
+                                margin: EdgeInsets.only(bottom: 10),
+                                child: Text(
+                                  '${document['description']}',
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 11),
+                                  maxLines: 2,
+                                ),
                               ),
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "${dataUser[0]["name"]}",
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w700,
-                                          color: Colors.black.withOpacity(0.7)),
+                            Expanded(flex: 1, child: SizedBox()),
+
+                            Expanded(
+                              flex: 24,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  FittedBox(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "${dataUser[0]["name"]}",
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w700,
+                                              color: Colors.black
+                                                  .withOpacity(0.7)),
+                                        ),
+                                        SizedBox(
+                                          height: 3,
+                                        ),
+                                        Text(
+                                          "Developer",
+                                          style: TextStyle(fontSize: 10),
+                                        )
+                                      ],
                                     ),
-                                    SizedBox(
-                                      height: 3,
+                                  ),
+                                  FittedBox(
+                                    fit: BoxFit.contain,
+                                    child: Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(
+                                              image: ("${dataUser[0]["profilePicture"]}" ==
+                                                      ""
+                                                  ? AssetImage(
+                                                      "assets/user_pic1.png")
+                                                  : NetworkImage(
+                                                      "${dataUser[0]["profilePicture"]}")),
+                                              fit: BoxFit.cover)),
                                     ),
-                                    Text(
-                                      "Profesi",
-                                      style: TextStyle(fontSize: 10),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Container(
-                                  width: 35,
-                                  height: 35,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      image: DecorationImage(
-                                          image: ("${dataUser[0]["profilePicture"]}" ==
-                                                  ""
-                                              ? AssetImage(
-                                                  "assets/user_pic1.png")
-                                              : NetworkImage(
-                                                  "${dataUser[0]["profilePicture"]}")),
-                                          fit: BoxFit.cover)),
-                                ),
-                              ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -340,3 +409,12 @@ class MessageGridTile extends StatelessWidget {
             }));
   }
 }
+
+//Container(
+//margin: EdgeInsets.only(top: 5),
+//child: Text(
+//'$formattedDate',
+//style: TextStyle(
+//color: Colors.black, fontSize: 12),
+//),
+//),

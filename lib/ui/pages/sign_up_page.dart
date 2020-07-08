@@ -91,14 +91,49 @@ class _SignUpPageState extends State<SignUpPage> {
                             alignment: Alignment.bottomCenter,
                             child: GestureDetector(
                               onTap: () async {
-                                if (widget.registrationData.profilePicture ==
-                                    null) {
-                                  widget.registrationData.profilePicture =
-                                      await getImage();
-                                } else {
-                                  widget.registrationData.profilePicture = null;
-                                }
-                                setState(() {});
+                                await showDialog(
+                                    context: context,
+                                    builder: (_) => AlertDialog(
+                                          title: Text("Chose Image Picker"),
+                                          backgroundColor: Colors.white,
+                                          actions: [
+                                            FlatButton(
+                                              onPressed: () async {
+                                                if (widget.registrationData
+                                                        .profilePicture ==
+                                                    null) {
+                                                  widget.registrationData
+                                                          .profilePicture =
+                                                      await getImage(
+                                                          ImageSource.camera);
+                                                } else {
+                                                  widget.registrationData
+                                                      .profilePicture = null;
+                                                }
+                                                setState(() {});
+                                              },
+                                              child: Text("Camera"),
+                                            ),
+                                            FlatButton(
+                                              onPressed: () async {
+                                                if (widget.registrationData
+                                                        .profilePicture ==
+                                                    null) {
+                                                  widget.registrationData
+                                                          .profilePicture =
+                                                      await getImage(
+                                                          ImageSource.gallery);
+                                                } else {
+                                                  widget.registrationData
+                                                      .profilePicture = null;
+                                                }
+                                                setState(() {});
+                                              },
+                                              child: Text("Gallery"),
+                                            ),
+                                          ],
+                                        ),
+                                    barrierDismissible: true);
                               },
                               child: Container(
                                 height: 28,

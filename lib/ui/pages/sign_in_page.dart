@@ -43,8 +43,8 @@ class _SignInPageState extends State<SignInPage> {
                     margin: EdgeInsets.only(bottom: 24),
                     height: 100,
                     decoration: BoxDecoration(
-                      image:
-                          DecorationImage(image: AssetImage('assets/Logo.png')),
+                      image: DecorationImage(
+                          image: AssetImage('assets/border_shadow.png')),
                     ),
                   ),
                   Text(

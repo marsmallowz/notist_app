@@ -66,7 +66,9 @@ class _MainPageState extends State<MainPage> {
                 elevation: 0,
 //                backgroundColor: Colors.transparent,
                 selectedItemColor: mainDark,
-                unselectedItemColor: mainDark,
+                unselectedItemColor: accentColor4,
+                selectedFontSize: 55,
+                unselectedFontSize: 40,
                 currentIndex: topNavBarIndex,
                 onTap: (index) {
                   setState(() {

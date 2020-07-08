@@ -14,13 +14,14 @@ class SplashPage extends StatelessWidget {
             Container(
               height: 164,
               decoration: BoxDecoration(
-                image: DecorationImage(image: AssetImage('assets/Logo.png')),
+                image: DecorationImage(
+                    image: AssetImage('assets/border_shadow.png')),
               ),
             ),
             Container(
               margin: EdgeInsets.only(top: 30, bottom: 8),
               child: Text(
-                "Wellcome to PhollPho",
+                "Wellcome to Notist",
                 style: blackTextFont.copyWith(
                   fontSize: 20,
                 ),
@@ -28,7 +29,7 @@ class SplashPage extends StatelessWidget {
             ),
             Container(
               child: Text(
-                "Make a poll for your Photo",
+                "Make a Note for your Partner",
                 style: blackTextFont.copyWith(
                     fontSize: 20, fontWeight: FontWeight.w300),
               ),

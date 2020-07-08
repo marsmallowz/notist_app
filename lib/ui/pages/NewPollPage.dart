@@ -61,13 +61,13 @@ class _NewPollPageState extends State<NewPollPage> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         actions: [
-          IconButton(
-            icon: Icon(
-              Icons.add_photo_alternate,
-              color: Colors.black.withOpacity(0.7),
-            ),
-            onPressed: () {},
-          ),
+//          IconButton(
+//            icon: Icon(
+//              Icons.add_photo_alternate,
+//              color: Colors.black.withOpacity(0.7),
+//            ),
+//            onPressed: () {},
+//          ),
 //          IconButton(
 //            icon: Icon(
 //              Icons.more_vert,
@@ -117,6 +117,16 @@ class _NewPollPageState extends State<NewPollPage> {
                                 ? AssetImage("assets/user_pic1.png")
                                 : NetworkImage(widget.photoProfile)),
                             fit: BoxFit.cover)),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ZoomPhoto(
+                                      photoProfile: widget.photoProfile,
+                                    )));
+                      },
+                    ),
                   ),
                   SizedBox(
                     width: 10,
@@ -132,7 +142,7 @@ class _NewPollPageState extends State<NewPollPage> {
             ),
 //            Text(widget.description),
             Container(
-              margin: EdgeInsets.only(bottom: 5),
+              margin: EdgeInsets.only(bottom: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
